@@ -16,7 +16,8 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
      * 3. a dot symbol;
      * 4. (domain) consists of 2 up to 6 symbols;
      *
-     * @param text - text to find emails in.
+     * @param text - text to find emails in;
+     * @return list of valid emails.
      */
     public List<String> firstTaskEasy(String text) {
         List<String> answers = new ArrayList<>();
@@ -35,7 +36,8 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
      * Go to https://help.returnpath.com/hc/en-us/articles/220560587-What-are-the-rules-for-email-address-syntax-
      * for more info;
      *
-     * @param text - text to find email in.
+     * @param text - text to find email in;
+     * @return list of valid emails.
      */
     public List<String> firstTaskMedium(String text) {
         List<String> answers = new ArrayList<>();
@@ -51,7 +53,8 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
     /**
      * Search email in "text" String using regEx from http://emailregex.com/;
      *
-     * @param text - text to find email in.
+     * @param text - text to find email in;
+     * @return list of valid emails.
      */
     public List<String> firstTaskHard(String text) {
         List<String> answers = new ArrayList<>();
@@ -81,7 +84,8 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
      * 4. a "/";
      * 5. a "/" or "";
      *
-     * @param text - text to find emails in.
+     * @param text - text to find URLs in;
+     * @return list of valid URLs.
      */
     public List<String> secondTaskEasy(String text) {
         List<String> answers = new ArrayList<>();
@@ -97,7 +101,8 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
     /**
      * Search URL in text using regEx from https://urlregex.com/
      *
-     * @param text - text to find emails in.
+     * @param text - text to find URLs in;
+     * @return list of valid URLs.
      */
     public List<String> secondTaskHard(String text) {
         List<String> answers = new ArrayList<>();
@@ -119,12 +124,29 @@ public class SolutionsInterfaceImpl implements SolutionsInterface {
      * b. 2-digit number, < 99;
      * c. a digit;
      *
-     * @param text - text to find emails in.
+     * @param text - text to find IPs in;
+     * @return list of valid IPs.
      */
-    public List<String> thirdTask(String text) {
+    public List<String> thirdTaskEasy(String text) {
         List<String> answers = new ArrayList<>();
         Pattern regEx = Pattern.compile("((((1[0-9][0-9])|(2([0-4][0-9])|(5[0-5])))|([1-9][0-9])|[0-9])\\.){3}" +
                 "(((1[0-9][0-9])|(2([0-4][0-9])|(5[0-5])))|([1-9][0-9])|[0-9])", Pattern.CASE_INSENSITIVE);
+        Matcher isIPAddress = regEx.matcher(text);
+        while (isIPAddress.find()) {
+            answers.add(text.substring(isIPAddress.start(), isIPAddress.end()));
+        }
+        return answers;
+    }
+
+    /**
+     * Search IP address in text, using regEx from stackOverflow
+     * @param text - text to find IPs in;
+     * @return list of valid IPs.
+     */
+    public List<String> thirdTaskHard(String text) {
+        List<String> answers = new ArrayList<>();
+        Pattern regEx = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}" +
+                "([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$", Pattern.CASE_INSENSITIVE);
         Matcher isIPAddress = regEx.matcher(text);
         while (isIPAddress.find()) {
             answers.add(text.substring(isIPAddress.start(), isIPAddress.end()));

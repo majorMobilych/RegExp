@@ -40,11 +40,7 @@ public class TasksTests {
         }));
         IP_ADDRESSES_TEXT_SAMPLES.add(new TextSample("9999.02.233.9", new ArrayList<>()));
         IP_ADDRESSES_TEXT_SAMPLES.add(new TextSample("999.023.255.12", new ArrayList<>()));
-        IP_ADDRESSES_TEXT_SAMPLES.add(new TextSample("  172.16.254.1", new ArrayList<String>() {
-            {
-                add("172.16.254.1");
-            }
-        }));
+        IP_ADDRESSES_TEXT_SAMPLES.add(new TextSample("  172.16.254.1", new ArrayList<>()));
     }
 
     @Test
@@ -79,7 +75,13 @@ public class TasksTests {
 
     @Test
     public void testTask3Easy() {
-        IP_ADDRESSES_TEXT_SAMPLES.forEach(textSample -> Assert.assertThat(SOLVER.thirdTask(textSample.getText()),
+        IP_ADDRESSES_TEXT_SAMPLES.forEach(textSample -> Assert.assertThat(SOLVER.thirdTaskEasy(textSample.getText()),
+                is(textSample.getExpectedResult())));
+    }
+
+    @Test
+    public void test3TaskHard() {
+        IP_ADDRESSES_TEXT_SAMPLES.forEach(textSample -> Assert.assertThat(SOLVER.thirdTaskHard(textSample.getText()),
                 is(textSample.getExpectedResult())));
     }
 }

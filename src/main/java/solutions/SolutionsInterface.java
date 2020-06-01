@@ -8,5 +8,6 @@ public interface SolutionsInterface {
     List<String> firstTaskHard(String text);
     List<String> secondTaskEasy(String text);
     List<String> secondTaskHard(String text);
-    List<String> thirdTask(String text);
+    List<String> thirdTaskEasy(String text);
+    List<String> thirdTaskHard(String text);
 }
